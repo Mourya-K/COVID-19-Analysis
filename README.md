@@ -3,6 +3,9 @@
 Have included the csv files of data that I used. It contains data uptil 03/03/2024.<br><br>
 Made changes to default data types of certain columns to suit arithmetic operations performed. To avoid confusion, attached screenshots of the final data types of all the columns of both csv files for reference. Make sure you match them on your device before running the sql queries to avoid errors. You can find the screenshots [here](./Final%20Data%20Types%20of%20Columns/)
 
+**Download the csv files and import their data into two different tables with the same names, make sure the data types match like I mentioned above, then run the sql query [file](./COVID%20Analysis%20Project.sql)
+, one query at a time, following the comments written.**
+
 ## Introduction: 
 This project involves exploring Covid-19 data using various SQL techniques such as Joins, CTEs, Temp Tables, Window Functions, Aggregate Functions, and creating Views.
 
