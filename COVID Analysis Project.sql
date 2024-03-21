@@ -11,8 +11,8 @@ FROM CovidDeaths
 where continent is NOT NULL
 order by 3,4
 
-
--- Select data that we are going to be starting with
+--------------------------------------------------------------------------------------------------------------------------------------
+-- Select data that we are going to be starting with 
 
 Select location, date, total_cases, new_cases, total_deaths, population
 From CovidDeaths
@@ -20,6 +20,7 @@ where continent is NOT NULL
 order by 1,2
 
 
+--------------------------------------------------------------------------------------------------------------------------------------
 -- Looking at Total Deaths vs Total Cases
 -- Shows the likelihood of dying if you contract covid in your country
 
@@ -28,7 +29,8 @@ From CovidDeaths
 where location like 'India' and continent is NOT NULL
 order by 1,2
 
-
+    
+--------------------------------------------------------------------------------------------------------------------------------------
 -- Looking at Total Cases vs Population
 -- Shows what percentage of the population got covid
 
@@ -38,6 +40,7 @@ where location like 'India' and continent is NOT NULL
 order by 1,2
 
 
+--------------------------------------------------------------------------------------------------------------------------------------
 -- Looking at countries with highest Infection Rate compared to population
 
 Select location, population, MAX(total_cases) as HighestInfectionCount, MAX((total_cases/population))*100 as PercentPopulationInfected
@@ -48,6 +51,7 @@ GROUP BY location, population
 order by 4 desc
 
 
+--------------------------------------------------------------------------------------------------------------------------------------    
 -- Showing countries with Highest Death Count per Population
 
 Select location, MAX(total_deaths) as TotalDeathCount
@@ -59,6 +63,7 @@ order by 2 desc
 
 
 
+--------------------------------------------------------------------------------------------------------------------------------------
 -- LET'S BREAK THINGS DOWN BY CONTINENT
 
 -- Showing continents with highest death count per population
@@ -71,7 +76,8 @@ GROUP BY continent
 order by 2 desc
 
 
-
+    
+--------------------------------------------------------------------------------------------------------------------------------------
 -- GLOBAL NUMBERS
 
 
@@ -91,7 +97,8 @@ where continent is NOT NULL and new_cases is NOT NULL
 -- GROUP BY date
 order by 1,2
 
-
+    
+--------------------------------------------------------------------------------------------------------------------------------------
 -- PERCENTAGE BY DATE
 Select date, SUM(new_cases) as total_cases, SUM(new_deaths) as total_deaths, 
 CASE 
@@ -109,7 +116,8 @@ GROUP BY date
 order by 1,2
 
 
-
+    
+--------------------------------------------------------------------------------------------------------------------------------------
 -- Looking at Total Population vs Vaccinations
 -- Shows Percentage of Population that has recieved at least one Covid Vaccine
 
@@ -124,7 +132,8 @@ where dea.continent is NOT NULL and vac.new_vaccinations is NOT NULL
 order by 2,3
 
 
-
+    
+--------------------------------------------------------------------------------------------------------------------------------------
 -- Using CTE to perform Calculation on Partition By in previous query
 
 With PopVSVac (continent, location, date, population, new_vaccinations, RollingPeopleVaccinated)
@@ -144,7 +153,8 @@ FROM PopVSVac
 
 
 
-
+    
+--------------------------------------------------------------------------------------------------------------------------------------
 -- Using Temp Table to perform Calculation on Partition By in previous query
 DROP TABLE if EXISTS #PercentagePeopleVaccinated
 CREATE TABLE #PercentagePeopleVaccinated
@@ -173,7 +183,8 @@ FROM #PercentagePeopleVaccinated
 
 
 
-
+    
+--------------------------------------------------------------------------------------------------------------------------------------
 -- Creating View to store data for later visualizations
 
 CREATE VIEW PercentagePeopleVaccinated as
